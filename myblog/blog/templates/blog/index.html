@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#    所有展示的内容居中显示#}
+<div style="text-align: center">
+    <h1>
+        <a href="{% url 'blog:edit_page' 0 %}">我的文章</a>
+    </h1>
+    {% for article in articles %}
+        <a href="{% url 'blog:article_page' article.id %}">{{ article.title }}</a>
+        <br/>
+    {% endfor %}
+    {#        循环遍历列表li#}
+    {% for i in li %}
+        <h4>{{ i }}</h4>
+    {% endfor %}
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    {#        if else 循环#}
+    {% if x == 1 %}
+        <h4>欢迎光临</h4>
+    {% else %}
+        <h4>您好</h4>
+    {% endif %}
+    {#        输出页面被刷新的时间#}
+    <style>
+        body {
+            padding-top: 40px;
+        }
+
+        #main {
+            margin: auto;
+            text-align: center;
+            width: 300px;
+            height: 200px;
+            background-color: #0CC;
+        }
+
+        #show_time0, #show_time {
+            width: 300px;
+            height: 100px;
+            color: #FFF;
+        }
+    </style>
+    </head>
+
+    <body>
+    <div id="main">
+        <div id="show_time0" style="">
+        </div>
+        <div id="show_time">
+            <script>
+                //这里代码多了几行，但是不会延迟显示，速度比较好，格式可以自定义，是理想的时间显示
+                setInterval("fun(show_time)", 1);
+
+                function fun(timeID) {
+                    var date = new Date();  //创建对象
+                    var y = date.getFullYear();     //获取年份
+                    var m = date.getMonth() + 1;   //获取月份  返回0-11
+                    var d = date.getDate(); // 获取日
+                    var w = date.getDay();   //获取星期几  返回0-6   (0=星期天)
+                    var ww = ' 星期' + '日一二三四五六'.charAt(new Date().getDay());//星期几
+                    var h = date.getHours();  //时
+                    var minute = date.getMinutes()  //分
+                    var s = date.getSeconds(); //秒
+                    var sss = date.getMilliseconds(); //毫秒
+                    if (m < 10) {
+                        m = "0" + m;
+                    }
+                    if (d < 10) {
+                        d = "0" + d;
+                    }
+                    if (h < 10) {
+                        h = "0" + h;
+                    }
+                    if (minute < 10) {
+                        minute = "0" + minute;
+                    }
+                    if (s < 10) {
+                        s = "0" + s;
+                    }
+                    if (sss < 10) {
+                        sss = "00" + sss;
+                    } else if (sss < 100) {
+                        sss = "0" + sss;
+                    }
+                    document.getElementById(timeID.id).innerHTML = y + "-" + m + "-" + d + "   " + h + ":" + minute + ":" + s + "." + sss + "  " + ww;
+//document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s);
+                }
+            </script>
+        </div>
+        <script type="application/javascript" src="/static/js/jquery-2.2.1.min.js"></script>
+        <script type="application/javascript" src="/static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
